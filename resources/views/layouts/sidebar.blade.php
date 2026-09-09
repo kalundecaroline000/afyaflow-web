@@ -30,6 +30,7 @@
             <a href="{{ route('receptionist.patients.create') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('receptionist.patients.*') ? 'bg-pink-100 text-pink-700' : 'text-gray-600 hover:bg-gray-50' }}">Register Patient</a>
         @elseif($roleName === 'admin')
             <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-gray-200 text-gray-800' : 'text-gray-600 hover:bg-gray-50' }}">Dashboard</a>
+<a href="{{ route('admin.users.index') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.users.*') ? 'bg-gray-200 text-gray-800' : 'text-gray-600 hover:bg-gray-50' }}">Manage Users</a>
         @endif
 @php
     $notifications = auth()->user()->notifications()->latest()->take(5)->get();
