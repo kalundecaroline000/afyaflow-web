@@ -22,6 +22,7 @@
         @elseif($roleName === 'nurse')
             <a href="{{ route('nurse.dashboard') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('nurse.dashboard') ? 'bg-teal-100 text-teal-700' : 'text-gray-600 hover:bg-gray-50' }}">Dashboard</a>
             <a href="{{ route('nurse.vitals.create') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('nurse.vitals.*') ? 'bg-teal-100 text-teal-700' : 'text-gray-600 hover:bg-gray-50' }}">Record Vitals</a>
+<a href="{{ route('nurse.wards.index') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('nurse.wards.*') ? 'bg-teal-100 text-teal-700' : 'text-gray-600 hover:bg-gray-50' }}">Ward Management</a>
         @elseif($roleName === 'billing_officer')
             <a href="{{ route('billing.dashboard') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('billing.dashboard') ? 'bg-amber-100 text-amber-700' : 'text-gray-600 hover:bg-gray-50' }}">Dashboard</a>
             <a href="{{ route('billing.invoices.index') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('billing.invoices.*') ? 'bg-amber-100 text-amber-700' : 'text-gray-600 hover:bg-gray-50' }}">Invoices</a>
@@ -31,6 +32,7 @@
         @elseif($roleName === 'admin')
             <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-gray-200 text-gray-800' : 'text-gray-600 hover:bg-gray-50' }}">Dashboard</a>
             <a href="{{ route('admin.users.index') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.users.*') ? 'bg-gray-200 text-gray-800' : 'text-gray-600 hover:bg-gray-50' }}">Manage Users</a>
+<a href="{{ route('admin.wards.index') }}" class="block px-4 py-2 rounded-md text-sm font-medium {{ request()->routeIs('admin.wards.*') ? 'bg-gray-200 text-gray-800' : 'text-gray-600 hover:bg-gray-50' }}">Manage Wards</a>
         @endif
 
         @php

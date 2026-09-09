@@ -12,6 +12,9 @@ use App\Http\Controllers\Patient\MedicalRecordController;
 use App\Http\Controllers\Patient\PaymentController;
 use App\Http\Controllers\Patient\InvoiceController as PatientInvoiceController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WardController;
+use App\Http\Controllers\Nurse\WardController as NurseWardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +59,7 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
 
     Route::get('/patient/appointments/create', [AppointmentController::class, 'create'])->name('patient.appointments.create');
     Route::post('/patient/appointments', [AppointmentController::class, 'store'])->name('patient.appointments.store');
-Route::get('/patient/invoices', [PatientInvoiceController::class, 'index'])->name('patient.invoices.index');
+    Route::get('/patient/invoices', [PatientInvoiceController::class, 'index'])->name('patient.invoices.index');
 });
 
 Route::middleware(['auth', 'role:nurse'])->group(function () {
@@ -66,6 +69,10 @@ Route::middleware(['auth', 'role:nurse'])->group(function () {
 
     Route::get('/nurse/vitals/create', [VitalController::class, 'create'])->name('nurse.vitals.create');
     Route::post('/nurse/vitals', [VitalController::class, 'store'])->name('nurse.vitals.store');
+
+    Route::get('/nurse/wards', [NurseWardController::class, 'index'])->name('nurse.wards.index');
+    Route::post('/nurse/wards/{id}/admit', [NurseWardController::class, 'admit'])->name('nurse.wards.admit');
+    Route::post('/nurse/wards/{id}/discharge', [NurseWardController::class, 'discharge'])->name('nurse.wards.discharge');
 });
 
 Route::middleware(['auth', 'role:billing_officer'])->group(function () {
@@ -92,15 +99,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
 
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::post('/admin/users/{id}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
     Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-});
+
+    Route::get('/admin/wards', [WardController::class, 'index'])->name('admin.wards.index');
+    Route::post('/admin/wards', [WardController::class, 'store'])->name('admin.wards.store');
+    Route::delete('/admin/wards/{id}', [WardController::class, 'destroy'])->name('admin.wards.destroy');
 });
 
 Route::post('/mpesa/callback', [PaymentController::class, 'callback'])->name('mpesa.callback');
